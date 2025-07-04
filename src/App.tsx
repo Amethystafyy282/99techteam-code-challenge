@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <div className="flex flex-col p-10">
+        <div className="flex flex-col p-10 gap-4">
           <FirstProblem />
           <ThirdProblem />
         </div>

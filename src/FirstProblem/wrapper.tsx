@@ -1,29 +1,22 @@
-import { useMemo, useState } from "react";
-
 interface Props {
-  title: string;
+  noOfTest: string;
   onInputChange: (n: number) => number;
+  value: number;
 }
 
-export const FirstProblemWrapper = ({ title, onInputChange }: Props) => {
-  const [input, setInput] = useState<number>(0);
-
-  const sumNumber = useMemo(() => onInputChange(input), [input]);
-
+export const FirstProblemWrapper = ({
+  noOfTest,
+  onInputChange,
+  value,
+}: Props) => {
   return (
     <div className="flex flex-col gap-4">
-      <div className="font-bold font-medium">{title}</div>
-      <div className="flex flex-row gap-2 items-center">
-        <input
-          type="number"
-          value={input}
-          onChange={(e) => setInput(Number(e.target.value))}
-          className="h-10 border border-black rounded-md px-2"
-        />
-        <div>Total: {sumNumber}</div>
+      <div className="flex flex-row items-center gap-4">
+        <div className="text-2xl font-medium text-blue-950">{`First Problem #${noOfTest}`}</div>
+        <div className="text-blue-950 text-xl">Total: {value}</div>
       </div>
       <div className="flex flex-row gap-2">
-        <div>Algorithm:</div>
+        <div className="text-blue-950 text-base">Algorithm:</div>
         <mark>{onInputChange.toString()}</mark>
       </div>
     </div>
