@@ -11,25 +11,20 @@ export const FirstProblemWrapper = ({ title, onInputChange }: Props) => {
   const sumNumber = useMemo(() => onInputChange(input), [input]);
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-      <div>{title}</div>
-      <div style={{ display: "flex", flexDirection: "row", gap: "8px" }}>
+    <div className="flex flex-col gap-4">
+      <div className="font-bold font-medium">{title}</div>
+      <div className="flex flex-row gap-2 items-center">
         <input
           type="number"
           value={input}
           onChange={(e) => setInput(Number(e.target.value))}
+          className="h-10 border border-black rounded-md px-2"
         />
         <div>Total: {sumNumber}</div>
       </div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          gap: "4px",
-        }}
-      >
+      <div className="flex flex-row gap-2">
         <div>Algorithm:</div>
-        <div>{onInputChange.toString()}</div>
+        <mark>{onInputChange.toString()}</mark>
       </div>
     </div>
   );

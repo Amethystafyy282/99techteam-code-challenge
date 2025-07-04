@@ -1,25 +1,44 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-export interface WalletBalance {
+export interface Currency {
   currency: string;
-  amount: number;
+  price: number;
+  date: string;
 }
 
 interface UseWalletBalances {
-  fetchWalletBalance: () => Promise<Array<WalletBalance>>;
+  currencies: Array<Currency> | undefined;
 }
 
-export const useWalletBalances = (): UseWalletBalances => {
-  const fetchWalletBalance = useCallback((): Promise<Array<WalletBalance>> => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve([
-          { currency: "Pound", amount: 100 },
-          { currency: "Dollar", amount: 50 },
-        ]);
-      }, 3000);
-    });
+export const useCurrencies = (): UseWalletBalances => {
+  const [currencies, setCurrencies] = useState<Array<Currency> | undefined>(
+    undefined,
+  );
+
+  useEffect(() => {
+    fetch("https://interview.switcheo.com/prices.json")
+      .then((res) => res.json())
+      .then((results: Array<Currency>) => {
+        if (Array.isArray(results)) {
+          // to prevent currency's duplication
+          const uniques = new Map<string, Currency>();
+
+          results.forEach((c) => {
+            if (!uniques.has(c.currency)) {
+              uniques.set(c.currency, c);
+            }
+          });
+
+          const toArray = Array.from(uniques.values());
+          setCurrencies(toArray);
+        } else {
+          setCurrencies([]);
+        }
+      })
+      .catch(() => {
+        setCurrencies([]);
+      });
   }, []);
 
-  return { fetchWalletBalance };
+  return { currencies };
 };

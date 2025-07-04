@@ -5,13 +5,7 @@ export const FirstProblem = () => {
   const { sum_to_n_a, sum_to_n_b, sum_to_n_c } = useFirstProblem();
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: "16px",
-      }}
-    >
+    <div className="flex flex-col gap-4">
       <FirstProblemWrapper
         title="First Problem #1"
         onInputChange={sum_to_n_a}

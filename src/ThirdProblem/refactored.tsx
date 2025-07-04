@@ -1,45 +1,26 @@
-import { useEffect, useMemo, useState } from "react";
-import { usePrices } from "../hooks/usePrices";
-import { useWalletBalances, WalletBalance } from "../hooks/useWalletBalances";
+import { useMemo } from "react";
+import { useCurrencies } from "../hooks/useCurrencies";
+import { SecondProblem } from "../SecondProblem";
+import { Spin } from "antd";
 
-const WalletPage = () => {
-  const { fetchWalletBalance } = useWalletBalances();
-  const { getPriceByCurrency } = usePrices();
+export const ThirdProblem = () => {
+  const { currencies } = useCurrencies();
 
-  const [balances, setBalances] = useState<Array<WalletBalance>>(undefined); // TODO: Undefined value can be used as `isLoading`
-
-  useEffect(() => {
-    fetchWalletBalance().then(setBalances);
-  }, []);
-
-  const filteredBalances = useMemo(() => {
-    if (Array.isArray(balances)) {
-      return balances.filter((balance) => balance.amount > 0);
+  const filteredCurrencies = useMemo(() => {
+    if (Array.isArray(currencies)) {
+      return currencies.filter((c) => c.price > 0);
     }
 
     return [];
-  }, [balances]);
+  }, [currencies]);
 
-  const sortedBalances = useMemo(() => {
-    return filteredBalances.sort((lhs, rhs) => lhs.amount - rhs.amount);
-  }, [filteredBalances]);
+  const sortedCurrencies = useMemo(() => {
+    return filteredCurrencies.sort((l, r) => r.price - l.price);
+  }, [filteredCurrencies]);
 
-  return (
-    <div>
-      {sortedBalances.map((balance) => {
-        const usdValue = getPriceByCurrency(balance.currency) * balance.amount;
-        const fixedAmount = balance.amount.toFixed();
+  if (!currencies) {
+    return <Spin size="large" />;
+  }
 
-        return (
-          <WalletRow
-            key={balance.currency}
-            currency={balance.currency}
-            amount={balance.amount}
-            usdValue={usdValue}
-            fixedAmount={fixedAmount}
-          />
-        );
-      })}
-    </div>
-  );
+  return <SecondProblem currencies={sortedCurrencies} />;
 };
