@@ -10,13 +10,16 @@ export const CurrencySelector = ({
   onCurrencyIdChange,
   currencyOptions,
 }: Props) => {
+  const getCurrencyIconSrc = (iconId: string) =>
+    `https://raw.githubusercontent.com/Switcheo/token-icons/main/tokens/${iconId}.svg`;
+
   return (
     <Select
-      className="w-full h-14 text-2xl"
+      className="w-full h-14"
       suffixIcon={
         <img
           className="w-6 h-6"
-          src={`https://raw.githubusercontent.com/Switcheo/token-icons/main/tokens/${currencyId}.svg`}
+          src={getCurrencyIconSrc(currencyId)}
           alt={currencyId}
         />
       }
@@ -34,7 +37,7 @@ export const CurrencySelector = ({
             <div>{data.value}</div>
             <img
               className="w-6 h-6"
-              src={`https://raw.githubusercontent.com/Switcheo/token-icons/main/tokens/${data.value}.svg`}
+              src={getCurrencyIconSrc(`${data.value}`)}
               alt={data.value?.toString()}
             />
           </div>

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Button, Input } from "antd";
 import { SwapOutlined, SyncOutlined } from "@ant-design/icons";
 import { CurrencySelector } from "./currencySelector";
@@ -86,29 +86,35 @@ export const SecondProblem = ({ currencies }: Props) => {
     }
   }, [exchangeAmount]);
 
-  const handleTransformFromCurrencyChange = (newCurr: string) => {
-    if (newCurr === transformToCurrencyId) {
-      setTransformToCurrencyId(transformFromCurrencyId);
-    }
+  const handleTransformFromCurrencyChange = useCallback(
+    (newCurr: string) => {
+      if (newCurr === transformToCurrencyId) {
+        setTransformToCurrencyId(transformFromCurrencyId);
+      }
 
-    setTransformFromCurrencyId(newCurr);
-  };
+      setTransformFromCurrencyId(newCurr);
+    },
+    [transformFromCurrencyId, transformToCurrencyId],
+  );
 
-  const handleTransformToCurrencyChange = (newCurr: string) => {
-    if (newCurr === transformFromCurrencyId) {
-      setTransformFromCurrencyId(transformToCurrencyId);
-    }
+  const handleTransformToCurrencyChange = useCallback(
+    (newCurr: string) => {
+      if (newCurr === transformFromCurrencyId) {
+        setTransformFromCurrencyId(transformToCurrencyId);
+      }
 
-    setTransformToCurrencyId(newCurr);
-  };
+      setTransformToCurrencyId(newCurr);
+    },
+    [transformFromCurrencyId, transformToCurrencyId],
+  );
 
-  const handleSwapFromAndTo = () => {
+  const handleSwapFromAndTo = useCallback(() => {
     const currentFirstCurrencyId = transformFromCurrencyId;
     const currentSecondCurrencyId = transformToCurrencyId;
 
     setTransformFromCurrencyId(currentSecondCurrencyId);
     setTransformToCurrencyId(currentFirstCurrencyId);
-  };
+  }, [transformFromCurrencyId, transformToCurrencyId]);
 
   const mappedCurrencyOptions = useMemo(() => {
     if (Array.isArray(currencies)) {
@@ -153,12 +159,13 @@ export const SecondProblem = ({ currencies }: Props) => {
   return (
     <div>
       {contextHolder}
-      <div className="flex flex-col gap-4 h-full bg-white rounded-lg border-4 p-10 w-2/3 justify-self-center">
+      <div className="flex flex-col gap-4 h-full bg-white rounded-lg border-4 border-blue-950 p-10 w-2/3 justify-self-center">
         <div className="flex flex-row gap-4 justify-end items-end">
           <div className="flex flex-col w-1/3">
             <div className="flex flex-col gap-2">
               <div className="text-xl font-medium">Amount</div>
               <Input
+                size="large"
                 className="h-14"
                 status={exchangeAmountError ? "error" : undefined}
                 placeholder="Enter your amount to start conversion"

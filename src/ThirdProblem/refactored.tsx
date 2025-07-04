@@ -6,17 +6,15 @@ import { Spin } from "antd";
 export const ThirdProblem = () => {
   const { currencies } = useCurrencies();
 
-  const filteredCurrencies = useMemo(() => {
+  const sortedCurrencies = useMemo(() => {
     if (Array.isArray(currencies)) {
-      return currencies.filter((c) => c.price > 0);
+      return currencies
+        .filter((c) => c.price > 0)
+        .sort((l, r) => r.price - l.price);
     }
 
     return [];
   }, [currencies]);
-
-  const sortedCurrencies = useMemo(() => {
-    return filteredCurrencies.sort((l, r) => r.price - l.price);
-  }, [filteredCurrencies]);
 
   if (!currencies) {
     return <Spin size="large" />;

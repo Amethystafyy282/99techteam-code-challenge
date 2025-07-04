@@ -9,9 +9,16 @@ interface Props {
   onConfirm: () => void;
   onCancel?: () => void;
   title: string;
+  content?: string;
 }
 
-export const ConfirmModal = ({ title, state, onConfirm, onCancel }: Props) => {
+export const ConfirmModal = ({
+  title,
+  state,
+  onConfirm,
+  onCancel,
+  content = "Are you sure you want to perform this action?",
+}: Props) => {
   const { isOpen, setOpen } = state;
 
   const handleOk = () => {
@@ -39,7 +46,7 @@ export const ConfirmModal = ({ title, state, onConfirm, onCancel }: Props) => {
         </>
       )}
     >
-      <p>Are you sure you want to perform this action?</p>
+      <p>{content}</p>
     </Modal>
   );
 };
