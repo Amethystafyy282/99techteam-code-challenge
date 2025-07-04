@@ -1,11 +1,11 @@
-import { useFirstProblem } from "../hooks/useFirstProblem";
+import { useSummaryMethods } from "../hooks/useSummaryMethods";
 import { FirstProblemWrapper } from "./wrapper";
 import { Divider } from "../components/divider";
 import { Input } from "antd";
 import { useState } from "react";
 
 export const FirstProblem = () => {
-  const { sum_to_n_a, sum_to_n_b, sum_to_n_c } = useFirstProblem();
+  const { sum_to_n_a, sum_to_n_b, sum_to_n_c } = useSummaryMethods();
 
   const [input, setInput] = useState<string>("");
 
