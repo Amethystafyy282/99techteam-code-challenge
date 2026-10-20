@@ -1,0 +1,4 @@
+node_modules
+dist
+# SQLite database file created at runtime
+data

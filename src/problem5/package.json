@@ -1,0 +1,33 @@
+{
+  "name": "wallet-balance-api",
+  "private": true,
+  "version": "1.0.0",
+  "description": "CRUD API for wallet balances, built with Express and TypeScript",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc -p tsconfig.build.json",
+    "start": "node dist/index.js",
+    "seed": "tsx src/db/seed.ts",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "express": "^5.3.0",
+    "sql.js": "^1.15.1",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^24.19.2",
+    "@types/sql.js": "^1.4.11",
+    "@types/supertest": "^7.2.1",
+    "supertest": "^7.3.1",
+    "tsx": "^4.23.15",
+    "typescript": "~5.8.3",
+    "vitest": "^4.1.12"
+  }
+}

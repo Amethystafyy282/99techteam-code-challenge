@@ -1,0 +1,46 @@
+{
+  "name": "99techteam-code-challenge",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "api": "npm run dev -w wallet-balance-api",
+    "api:seed": "npm run seed -w wallet-balance-api",
+    "dev:all": "concurrently --kill-others-on-fail --names api,web --prefix-colors blue,magenta \"npm run api\" \"npm run dev\"",
+    "api:test": "npm test -w wallet-balance-api"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "tailwind-merge": "^3.7.0"
+  },
+  "devDependencies": {
+    "@stylistic/eslint-plugin": "^5.10.0",
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "@vitejs/plugin-react": "^4.5.0",
+    "concurrently": "^9.2.5",
+    "eslint": "^10.13.0",
+    "prettier": "^3.9.10",
+    "prettier-plugin-tailwindcss": "^0.8.1",
+    "tailwindcss": "^4.3.3",
+    "typescript": "~5.8.3",
+    "typescript-eslint": "^8.71.2",
+    "vite": "^6.3.5"
+  },
+  "workspaces": [
+    "src/problem5"
+  ]
+}

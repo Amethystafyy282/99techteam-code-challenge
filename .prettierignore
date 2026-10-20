@@ -1,0 +1,7 @@
+dist
+node_modules
+package-lock.json
+
+# Original challenge material, kept as provided
+readme.md
+src/problem3/messy.tsx
