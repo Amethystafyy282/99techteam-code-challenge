@@ -31,3 +31,9 @@ Problem 1 runs on its own: `node src/problem1/sum_to_n.js`.
 ## Tech stack
 
 React 19, TypeScript, Vite, Tailwind CSS v4 · Express 5, Zod, SQLite (sql.js) · Vitest, ESLint, Prettier
+
+## Use of AI
+
+I used an AI coding assistant (Claude Code) to speed up the work: scaffolding, repetitive refactors, writing tests
+and checking edge cases. I made the design decisions, reviewed every change, and kept the code to the conventions
+enforced by the ESLint and Prettier setup.
